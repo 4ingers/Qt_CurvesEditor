@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+
+  <node id="Ellipse">
+    <eq> x2/3 + y2/2 = 1 </eq>
+  </node>
+
+  <node id="Circle">
+    <eq> x2 + y2 = 9 </eq>
+  </node>
+
+  <node id="Hyperbulum">
+    <eq> x2 - y2/5 = 1 </eq>
+  </node>
+
+  <node id="Parabellum">
+    <eq> y2 = 10x </eq>
+    <eq> x2 = 10y </eq>
+  </node>
+
+  <node id="Nothing">
+    <eq> 3x2 + 2y2 = 0 </eq>
+  </node>
+
+  <node id="Intersected">
+    <eq> x2/2 - 10y2 = 0 </eq>
+  </node>
+
+  <node id="Parallel">
+    <eq> x2/9 = 1 </eq>
+    <eq> y2/9 = 1 </eq>
+  </node>
+
+  <node id="Single">
+    <eq> x2 = 0 </eq>
+    <eq> y2 = 0 </eq>
+  </node>
+
+</nodes>
