@@ -69,16 +69,22 @@ void MainWindow::mouseWheelEvent() {
     this->painter();
 }
 
+// Упрощённый полином
+void MainWindow::setSimplified() {
+    this->ui->simpleEdit->setPlaceholderText(this->polynom.simpleOutput());
+}
+
 // Нажатие ENTER при фокусе equationEdit
 void MainWindow::on_equationEdit_returnPressed() {
 
     // Очистка полинома
-    polynom.reset();
+    this->polynom.reset();
 
     // Если строка пустая -- очистка полотна
     if (this->ui->equationEdit->text().isEmpty()) {
         this->ui->customPlot->graph(0)->clearData();
         this->ui->customPlot->replot();
+        this->ui->simpleEdit->clear();
         return;
     }
 
@@ -90,10 +96,12 @@ void MainWindow::on_equationEdit_returnPressed() {
         this->ui->customPlot->graph(0)->clearData();
         this->ui->customPlot->replot();
         this->ui->labelCurve->setText(QString("ERROR\n") + error);
+        this->ui->simpleEdit->clear();
         return;
     }
     // Иначе отображение кривой
     this->showCurve();
+    this->setSimplified();
 }
 
 // Отображение графика и информации
@@ -328,12 +336,20 @@ void MainWindow::loadBasicFile(const QString& fileName) {
     file.close();
 }
 
-void MainWindow::on_treeWgt_itemClicked(QTreeWidgetItem *item, int column) {
+// Клик по элементу дерева
+void MainWindow::on_treeWgt_itemClicked(QTreeWidgetItem *item)
+{
+    // Сброс выделения
     this->ui->treeWgt->clearSelection();
+
+    // Ради избежания неоднозначных ситуаций
     if (!item->parent()) {
         return;
     }
-    QString line = item->text(column);
+
+    // Перенос строки из дерева в equationEdit с проверкой
+    // и построение кривой
+    QString line = item->text(0);
     line.replace(QString('x') + QString(QChar(0262)), "x2");
     line.replace(QString('y') + QString(QChar(0262)), "y2");
     this->ui->equationEdit->setText(line);
@@ -344,15 +360,16 @@ void MainWindow::on_treeWgt_itemClicked(QTreeWidgetItem *item, int column) {
         this->ui->customPlot->graph(0)->clearData();
         this->ui->customPlot->replot();
         this->ui->labelCurve->setText(QString("ERROR\n") + error);
+        this->ui->simpleEdit->clear();
+        return;
     }
-    else
-        this->showCurve();
+    this->showCurve();
+    this->setSimplified();
 }
 
 // Контекстное меню в дереве
 void MainWindow::on_treeWgt_customContextMenuRequested()
 {
-    // Объект окна
     QMenu menu;
 
     // Если в момент клика не выделился элемент или у выделенного нет родителя,
@@ -453,7 +470,7 @@ quadratics are placed!<br>And you can add or delete folder and items and...<br>\
 void MainWindow::on_actionAbout_triggered() {
     QMessageBox::about(this, "Black Quadratic Tuesday",
 "<font face=\"menlo\"><center><font size=\"5\">Водяков Александр<br>\
-М8О-213Б-17<br><br>Black Tuesday Corp.</font></center></font>");
+М8О-213Б-17<br><br><b>Black Tuesday Corp.</b></font></center></font>");
 }
 
 void MainWindow::on_actionExit_triggered() {

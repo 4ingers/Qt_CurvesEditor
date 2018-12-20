@@ -18,6 +18,26 @@ bool Polynom::isEmpty() const
     return this->mapPolynom.isEmpty();
 }
 
+// Представление упрощённого полинома в виде строки
+QString Polynom::simpleOutput() const {
+    QStringList monomList;
+    if (this->mapPolynom.contains("x2"))
+        monomList.append(QString::number(this->mapPolynom["x2"]) + "x2");
+    if (this->mapPolynom.contains("y2"))
+        monomList.append(QString::number(this->mapPolynom["y2"]) + "y2");
+    if (this->mapPolynom.contains("xy"))
+        monomList.append(QString::number(this->mapPolynom["xy"]) + "xy");
+    if (this->mapPolynom.contains("x"))
+        monomList.append(QString::number(this->mapPolynom["x"]) + "x");
+    if (this->mapPolynom.contains("y"))
+        monomList.append(QString::number(this->mapPolynom["y"]) + "y");
+    if (this->mapPolynom.contains(""))
+        monomList.append(QString::number(this->mapPolynom[""]) + "");
+    QString result = monomList.join('+') + QString("=0");
+    result.replace("+-", "-");
+    return result;
+}
+
 // Вставка монома
 void Polynom::addMonom(const double& coef,
                         const QString& var)

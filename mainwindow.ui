@@ -189,7 +189,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="vLayRight" stretch="1,28,2,0">
+     <layout class="QVBoxLayout" name="vLayRight" stretch="1,28,2,0,0">
       <item>
        <widget class="QLabel" name="labelCurve">
         <property name="font">
@@ -252,10 +252,10 @@
          <set>Qt::AlignCenter</set>
         </property>
         <property name="placeholderText">
-         <string> Enter an equation</string>
+         <string>Enter an equation</string>
         </property>
         <property name="clearButtonEnabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -271,6 +271,34 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="simpleEdit">
+        <property name="font">
+         <font>
+          <family>Menlo</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Simplified will be here</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

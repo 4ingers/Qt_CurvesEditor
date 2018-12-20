@@ -15,7 +15,6 @@ public:
     Polynom(QMap<QString, double>&);
     Polynom(const Polynom&);
 
-    void reset();
 
     static void parser(QString& err,
                        const QString& input,
@@ -25,25 +24,31 @@ public:
                             QStringList&,
                             Polynom* output = nullptr);
 
-    bool isEmpty() const;
-
-    bool isNotEqual() const;
-
-    QVector<double> solveForVar(const double& c, QString var, bool& ok) const;
+    QVector<double> solveForVar(const double& c,
+                                 QString var,
+                                 bool& ok) const;
 
     QVector<double> invariants() const;
-
+    QString simpleOutput() const;
+    bool isNotEqual() const;
+    bool isEmpty() const;
     int type() const;
+    void reset();
+
+
 
 
 private:
-    void addMonom(const double&, const QString&);
+    QVector<double> findRoots(const QString var,
+                               bool& ok) const;
+
+    Polynom atPoint(const double& x,
+                     const QString& var) const;
+
+    void addMonom(const double&,
+                   const QString&);
 
     double discriminant(const QString& var) const;
-
-    Polynom atPoint(const double& x, const QString& var) const;
-
-    QVector<double> findRoots(const QString var, bool& ok) const;
 
 
     // ===== Хэш: ключ-степень, значение-коэффициент =====

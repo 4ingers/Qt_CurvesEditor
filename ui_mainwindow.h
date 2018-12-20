@@ -52,6 +52,7 @@ public:
     QCustomPlot *customPlot;
     QLineEdit *equationEdit;
     QSpacerItem *bottomSpacer;
+    QLineEdit *simpleEdit;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
@@ -205,13 +206,23 @@ public:
         equationEdit->setMaxLength(36);
         equationEdit->setFrame(false);
         equationEdit->setAlignment(Qt::AlignCenter);
-        equationEdit->setClearButtonEnabled(true);
+        equationEdit->setClearButtonEnabled(false);
 
         vLayRight->addWidget(equationEdit);
 
         bottomSpacer = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         vLayRight->addItem(bottomSpacer);
+
+        simpleEdit = new QLineEdit(wgtCentral);
+        simpleEdit->setObjectName(QStringLiteral("simpleEdit"));
+        simpleEdit->setFont(font1);
+        simpleEdit->setCursor(QCursor(Qt::ArrowCursor));
+        simpleEdit->setFrame(false);
+        simpleEdit->setAlignment(Qt::AlignCenter);
+        simpleEdit->setReadOnly(true);
+
+        vLayRight->addWidget(simpleEdit);
 
         vLayRight->setStretch(0, 1);
         vLayRight->setStretch(1, 28);
@@ -280,7 +291,9 @@ public:
         labelCurve->setText(QApplication::translate("MainWindow", "Curve plotter", nullptr));
         equationEdit->setInputMask(QString());
         equationEdit->setText(QString());
-        equationEdit->setPlaceholderText(QApplication::translate("MainWindow", " Enter an equation", nullptr));
+        equationEdit->setPlaceholderText(QApplication::translate("MainWindow", "Enter an equation", nullptr));
+        simpleEdit->setText(QString());
+        simpleEdit->setPlaceholderText(QApplication::translate("MainWindow", "Simplified will be here", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi

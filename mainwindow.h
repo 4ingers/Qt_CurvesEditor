@@ -19,30 +19,27 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_equationEdit_returnPressed();
-    void mouseMoveEvent(QMouseEvent *event);
-    void mouseWheelEvent();
-    void on_actionOpen_triggered();
-    void on_treeWgt_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeWgt_itemClicked(QTreeWidgetItem *item);
     void on_treeWgt_customContextMenuRequested();
+    void on_actionContext_help_triggered();
+    void mouseMoveEvent(QMouseEvent *event);
+    void on_equationEdit_returnPressed();
+    void on_actionOpen_as_triggered();
+    void on_actionAbout_triggered();
+    void on_actionOpen_triggered();
+    void on_actionExit_triggered();
+    void mouseWheelEvent();
     void delItemInTree();
     void addItemInTree();
 
-    void on_actionContext_help_triggered();
-
-    void on_actionAbout_triggered();
-
-    void on_actionExit_triggered();
-
-    void on_actionOpen_as_triggered();
-
 private:
-    void convertPolynom(QString& error);
-    void painter();
-    void showCurve();
     void setInvariant(double delta, double D, double I, double B);
-    void setCurveType(int type);
     void loadBasicFile(const QString& fileName);
+    void convertPolynom(QString& error);
+    void setCurveType(int type);
+    void setSimplified();
+    void showCurve();
+    void painter();
 
     Ui::MainWindow *ui;
     Polynom polynom;
